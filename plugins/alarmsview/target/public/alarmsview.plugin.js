@@ -660,7 +660,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_ID", function() { return PLUGIN_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_NAME", function() { return PLUGIN_NAME; });
 const PLUGIN_ID = 'alarmsview';
-const PLUGIN_NAME = 'alarmsview';
+const PLUGIN_NAME = 'Alarms';
 
 /***/ }),
 
@@ -881,6 +881,17 @@ module.exports = __kbnSharedDeps__.KbnI18n;
 /***/ (function(module, exports) {
 
 module.exports = __kbnSharedDeps__.KbnI18nReact;
+
+/***/ }),
+
+/***/ "jquery":
+/*!*******************************************!*\
+  !*** external "__kbnSharedDeps__.Jquery" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __kbnSharedDeps__.Jquery;
 
 /***/ }),
 

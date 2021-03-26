@@ -19,10 +19,10 @@ export class AlarmsviewPlugin implements Plugin<AlarmsviewPluginSetup, Alarmsvie
   public setup(core: CoreSetup) {
     this.logger.debug('alarmsview: Setup');
     const router = core.http.createRouter();
+        
 
     // Register server side APIs
-    defineRoutes(router);
-
+    defineRoutes(router)
     return {};
   }
 

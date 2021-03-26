@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import { i18n } from '@kbn/i18n';
+import React from 'react';
 import { FormattedMessage, I18nProvider } from '@kbn/i18n/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AlarmsGrid from './alarmsgrid';
+import AlarmPage from './alarmpage';
 
 import {
-  EuiButton,
-  EuiHorizontalRule,
   EuiPage,
   EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageContentHeader,
   EuiPageHeader,
   EuiTitle,
-  EuiText,
 } from '@elastic/eui';
 
 import { CoreStart } from '../../../../src/core/public';
@@ -30,22 +25,6 @@ interface AlarmsviewAppDeps {
 }
 
 export const AlarmsviewApp = ({ basename, notifications, http, navigation }: AlarmsviewAppDeps) => {
-  // Use React hooks to manage state.
-  const [timestamp, setTimestamp] = useState<string | undefined>();
-
-  const onClickHandler = () => {
-    // Use the core http service to make a response to the server API.
-    http.get('/api/alarmsview/example').then((res) => {
-      setTimestamp(res.time);
-      // Use the core notifications service to display a success message.
-      notifications.toasts.addSuccess(
-        i18n.translate('alarmsview.dataUpdated', {
-          defaultMessage: 'Data updated',
-        })
-      );
-    });
-  };
-
   // Render the application DOM.
   // Note that `navigation.ui.TopNavMenu` is a stateful component exported on the `navigation` plugin's start contract.
   return (
@@ -54,10 +33,10 @@ export const AlarmsviewApp = ({ basename, notifications, http, navigation }: Ala
         <>
           <navigation.ui.TopNavMenu
             appName={PLUGIN_ID}
-            showSearchBar={true}
+            showSearchBar={false}
             useDefaultBehaviors={true}
           />
-          <EuiPage restrictWidth="1000px">
+          <EuiPage restrictWidth="1300px">
             <EuiPageBody>
               <EuiPageHeader>
                 <EuiTitle size="l">
@@ -71,37 +50,9 @@ export const AlarmsviewApp = ({ basename, notifications, http, navigation }: Ala
                 </EuiTitle>
               </EuiPageHeader>
               <EuiPageContent>
-                <EuiPageContentHeader>
-                  <EuiTitle>
-                    <h2>
-                      <FormattedMessage
-                        id="alarmsview.congratulationsTitle"
-                        defaultMessage="Testing things out!"
-                      />
-                    </h2>
-                  </EuiTitle>
-                </EuiPageContentHeader>
                 <EuiPageContentBody>
-                  <EuiText>
-                    <p>
-                      <FormattedMessage
-                        id="alarmsview.content"
-                        defaultMessage="Look through the generated code and check out the plugin development documentation."
-                      />
-                    </p>
-                    <EuiHorizontalRule />
-                    <p>
-                      <FormattedMessage
-                        id="alarmsview.timestampText"
-                        defaultMessage="Last timestamp: {time}"
-                        values={{ time: timestamp ? timestamp : 'Unknown' }}
-                      />
-                    </p>
-                    <EuiButton type="primary" size="s" onClick={onClickHandler}>
-                      <FormattedMessage id="alarmsview.buttonText" defaultMessage="Get data" />
-                    </EuiButton>
-                    <AlarmsGrid />
-                  </EuiText>
+                  <AlarmPage
+                    http={http}/>
                 </EuiPageContentBody>
               </EuiPageContent>
             </EuiPageBody>
