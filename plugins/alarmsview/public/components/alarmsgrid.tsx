@@ -15,7 +15,7 @@ import {
 
 import _ from 'lodash';
 
-import { CoreStart } from '../../../../src/core/public';
+import { CoreStart } from 'kibana/public';
 
 
 interface AlarmsGridDProps {
