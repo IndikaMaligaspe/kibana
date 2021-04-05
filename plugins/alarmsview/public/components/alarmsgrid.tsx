@@ -122,6 +122,7 @@ const AlarmsGrid = ({http, isAutoRefresh,  setAlarmsData, setDeleteAlarmId, setS
 
 
     useEffect( () => {
+        loadData();
         const id = setInterval(() =>{
             if(isAutoRefresh){
                 loadData();
@@ -136,8 +137,18 @@ const AlarmsGrid = ({http, isAutoRefresh,  setAlarmsData, setDeleteAlarmId, setS
                 const init_data = await res.data.hits.hits;
 
                 for (let i = 0; i< init_data.length; i++){
+
+                    var rules: Array<object> = init_data[i]._source.rules;
+                    var ruleStatus:boolean [] = rules.map((rule) => {
+                        if (rule.status === "timeout")
+                            return false;
+                        else
+                            return true;
+                    })
+                    if (ruleStatus.includes(false))
+                        continue;
                     const _source = init_data[i]._source 
-                    const alarmId = _source.alarm_id;
+                    const alarmId = init_data[i]._id;
                     const title = _source.title;
                     const timestamp =  _source.timestamp;
                     const updatedTimestamp =  _source.updated_time;    
