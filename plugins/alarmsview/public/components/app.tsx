@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, I18nProvider } from '@kbn/i18n/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AlarmPage from './alarmpage';
+import AlarmPage from './alarm-page';
 
 import {
   EuiPage,

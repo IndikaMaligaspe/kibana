@@ -7,7 +7,7 @@ import {
  } from '../../../../src/core/server/http/router';
 import esactions from '../elasticsearch.actions';
 
-
+const fs = require("fs")
 
 export function defineRoutes(router: IRouter ) {
    
@@ -26,12 +26,39 @@ export function defineRoutes(router: IRouter ) {
   );
   router.get(
    {
+     path: '/api/alarmsview/alarmsfilters',
+     validate: false,
+   },
+   async (context, request, response) => {
+    //  This is temporary, once we have the MITRE framework, 
+    // we should pick this from a different data source.
+
+      let rawdata = fs.readFileSync(__dirname+'/../data/intent.json');
+      let intent = JSON.parse(rawdata);
+      return response.ok({
+        body: {
+          data: intent
+        }
+      });
+     }
+  );
+
+  router.get(
+   {
      path: '/api/alarmsview/alarms',
      validate: false,
    },
    async (context, request, response) => {
+     var esQuery = '{"match_all": {}}'
+     if (request.url.query != null) {
+        var query = request.url.query as ParsedUrlQuery
+        if ((query)['esQuery']){
+          esQuery = esQuery = (query)['esQuery'] as string
+        }
+     }
+     console.log(esQuery);
     //  console.log("IMM - ",context.core.elasticsearch.client.asInternalUser.search())
-      const result  = await esactions.getAllAlarms(1000, context)
+      const result  = await esactions.getAllAlarms(1000, context, JSON.parse(esQuery))
       return response.ok({
         body: {
           data: result

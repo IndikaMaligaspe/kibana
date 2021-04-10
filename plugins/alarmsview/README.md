@@ -10,10 +10,7 @@ See the [kibana contributing guide](https://github.com/elastic/kibana/blob/maste
 
 ## Scripts
 
-<dl>
-  <dt><code>yarn kbn bootstrap</code></dt>
-  <dd>Execute this to install node_modules and setup the dependencies in your plugin and in Kibana</dd>
+`yarn kbn bootstrap` - Execute this to install node_modules and setup the dependencies in your plugin and in Kibana
 
-  <dt><code>yarn plugin-helpers build</code></dt>
-  <dd>Execute this to create a distributable version of this plugin that can be installed in Kibana</dd>
-</dl>
+`yarn plugin-helpers build` - Execute this to create a distributable version of this plugin that can be installed in Kibana
+
