@@ -1,7 +1,0 @@
-{
-  "prefix": "alarmsview",
-  "paths": {
-    "alarmsview": "."
-  },
-  "translations": ["translations/ja-JP.json"]
-}
